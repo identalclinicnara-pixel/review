@@ -69,18 +69,38 @@
 
   .btn-group { display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
   .choice-btn {
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    border-radius:50px; padding:13px 20px; font-size:0.98rem; font-weight:600;
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    border-radius:50px; padding:14px 20px; font-size:0.98rem; font-weight:600;
     cursor:pointer; border:2px solid #d8e8dc; background:var(--white);
     color:var(--text-dark); transition:all 0.2s; width:100%;
-    font-family: inherit;
+    font-family: inherit; text-align:center;
   }
-  .choice-btn.positive {
-    background:var(--green); border-color:var(--green); color:var(--white);
-    box-shadow:0 3px 10px rgba(58,125,79,0.22);
+  .choice-btn .emoji {
+    font-size:1.3rem;
+    flex-shrink:0;
   }
-  .choice-btn.positive:hover { background:var(--green-dark); border-color:var(--green-dark); }
-  .choice-btn.negative:hover { background:#f3f6f4; }
+  .choice-btn .label {
+    flex:1;
+    text-align:center;
+  }
+  .choice-btn.positive-dark {
+    background:var(--green-dark); border-color:var(--green-dark); color:var(--white);
+    box-shadow:0 3px 10px rgba(30,92,51,0.25);
+  }
+  .choice-btn.positive-dark:hover { background:#174d2a; }
+  .choice-btn.positive-light {
+    background:#174d2a; border-color:#174d2a; color:var(--white);
+    box-shadow:0 3px 10px rgba(23,77,42,0.3);
+  }
+  .choice-btn.positive-light:hover { background:#0f3a1e; border-color:#0f3a1e; }
+  .choice-btn.negative {
+    background:var(--white); border-color:#b8d8c0; color:var(--text-mid);
+  }
+  .choice-btn.negative:hover { background:#f3f6f4; border-color:var(--green); }
+  .choice-btn.negative-light {
+    background:var(--white); border-color:#c8d8cc; color:var(--text-dark);
+  }
+  .choice-btn.negative-light:hover { background:#f3f6f4; border-color:var(--green); }
 
   /* Googleアカウント選択 */
   .account-btn {
@@ -178,10 +198,18 @@
     <div class="step active" id="step1">
       <p class="question">当院の診療にご満足いただけたでしょうか？</p>
       <div class="btn-group">
-        <button class="choice-btn positive" onclick="select('vs')"><span>😊</span><span>とても満足した</span></button>
-        <button class="choice-btn positive" onclick="select('s')"><span>🙂</span><span>満足した</span></button>
-        <button class="choice-btn negative" onclick="select('ns')"><span>😐</span><span>あまり満足できなかった</span></button>
-        <button class="choice-btn negative" onclick="select('d')"><span>😔</span><span>満足できなかった</span></button>
+        <button class="choice-btn positive-light" onclick="select('vs')">
+          <span class="emoji">😊</span><span class="label">とても満足した</span>
+        </button>
+        <button class="choice-btn positive-light" onclick="select('s')">
+          <span class="emoji">🙂</span><span class="label">満足した</span>
+        </button>
+        <button class="choice-btn negative-light" onclick="select('ns')">
+          <span class="emoji">😐</span><span class="label">あまり満足できなかった</span>
+        </button>
+        <button class="choice-btn negative-light" onclick="select('d')">
+          <span class="emoji">😔</span><span class="label">満足できなかった</span>
+        </button>
       </div>
     </div>
 
@@ -219,8 +247,8 @@
     <div class="step" id="step2c">
       <button class="back-btn" onclick="show('step1')">← 戻る</button>
       <p class="question">ご不満な点をお聞かせください</p>
-      <div class="info-box">いただいたご意見は院長が直接確認し、改善に取り組みます。大切なお声をありがとうございます。</div>
-      <textarea id="badComment" placeholder="例：待ち時間が長かった、説明がもう少し欲しかった など、何でもお書きください。"></textarea>
+      <div class="info-box">ご期待に添えず、申し訳ございません。<br>今後は皆さまにご満足いただけますよう、診療・サービスの質向上に努めてまいりますので、よろしければご意見・ご要望をお聞かせください。</div>
+      <textarea id="badComment" placeholder="入力フォーム"></textarea>
       <button class="submit-btn" id="btnBad" onclick="submitComment('bad')">送信する</button>
       <div class="loading" id="loadingBad"><span class="spin"></span>送信中...</div>
     </div>
@@ -246,20 +274,19 @@
     <!-- 完了: Google口コミへ -->
     <div class="step" id="doneGoogle">
       <div class="thankyou">
-        <div class="ty-icon">⭐</div>
-        <div class="ty-msg">ありがとうございます！</div>
-        <div class="ty-sub" style="margin-bottom:20px;">下のボタンからGoogleの口コミページへ<br>移動できます。ひと言でも大変嬉しいです😊</div>
+        <div style="font-size:2rem; margin-bottom:8px;">⭐⭐⭐⭐⭐</div>
+        <div class="ty-msg" style="font-size:1.05rem; background:var(--green); color:#fff; border-radius:12px; padding:14px; margin-bottom:16px;">Google口コミで応援してください！✨</div>
+        <div class="ty-sub" style="margin-bottom:20px; text-align:left;">良かった点や印象に残った点について口コミをいただけると、スタッフの励みになります！<br><br>＼ 2分で完了！ ／</div>
       </div>
     </div>
 
   </div>
 
   <!-- Google口コミエリア（doneGoogle時に表示） -->
-  <div class="google-area" id="googleArea" style="display:none;">
-    <p>ご満足いただけましたら、ぜひ口コミをお願いします 😊</p>
-    <a class="google-btn" id="googleLink" href="https://www.google.com" target="_blank">
+  <div class="google-area" id="googleArea" style="display:none; padding:0 20px 30px;">
+    <a class="google-btn" id="googleLink" href="https://www.google.com" target="_blank" style="background:#4285F4; color:#fff; border-color:#4285F4; border-radius:50px; font-size:1rem; justify-content:center;">
       <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12.545 10.239v3.821h5.445c-.712 2.315-2.647 3.972-5.445 3.972a6.033 6.033 0 110-12.064c1.498 0 2.866.549 3.921 1.453l2.814-2.814A9.969 9.969 0 0012.545 2C7.021 2 2.543 6.477 2.543 12s4.478 10 10.002 10c8.396 0 10.249-7.85 9.426-11.748z" fill="#EA4335"/></svg>
-      Googleマップに口コミを書く →
+      口コミを書く ›
     </a>
   </div>
 
