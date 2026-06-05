@@ -245,8 +245,7 @@
 
     <!-- STEP2c: 不満 → 意見入力 -->
     <div class="step" id="step2c">
-      <button class="back-btn" onclick="show('step1')">← 戻る</button>
-      <p class="question">ご不満な点をお聞かせください</p>
+            <p class="question">ご不満な点をお聞かせください</p>
       <div class="info-box">ご期待に添えず、申し訳ございません。<br>今後は皆さまにご満足いただけますよう、診療・サービスの質向上に努めてまいりますので、よろしければご意見・ご要望をお聞かせください。</div>
       <textarea id="badComment" placeholder="入力フォーム"></textarea>
       <button class="submit-btn" id="btnBad" onclick="submitComment('bad')">送信する</button>
@@ -302,6 +301,12 @@
 
 <script>
   // ====== 設定 ======
+  // ブラウザの戻るボタン無効化
+  history.pushState(null, null, location.href);
+  window.addEventListener('popstate', function() {
+    history.pushState(null, null, location.href);
+  });
+
   const GOOGLE_REVIEW_URL = "https://g.page/r/CSpLbTjl1zYTEBM/review"; // ← 後でGoogle口コミURLに差し替え
   const GAS_URL = "https://script.google.com/macros/s/AKfycbxYAFnUR-vEP3LeYMvG_3Qxg8MrJFJVrKo2dEnWIvtkRl78d_JLe1Z_bJ4x2NmcUIJB/exec"; // ← 後でGoogle Apps ScriptのURLに差し替え
   // ==================
